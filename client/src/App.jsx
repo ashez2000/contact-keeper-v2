@@ -5,7 +5,15 @@ const App = () => {
     <>
       <Header />
       <main className="container">
-        <h1>Hello wordl</h1>
+        <section className="d-flex my-3">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Search Contacts"
+          />
+          <div className="mx-2" />
+          <button className="btn btn-sm btn-primary">Create</button>
+        </section>
       </main>
     </>
   )
