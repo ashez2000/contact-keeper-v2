@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start:dev:server": "npm run start:dev --prefix ./server"
+    "start:dev:server": "npm run start:dev --prefix ./server",
+    "start:dev:client": "npm run dev --prefix ./client"
   },
   "keywords": [],
   "author": "Aswin Gangadharan",
