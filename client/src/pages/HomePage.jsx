@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import ContactList from '../components/ContactList'
 
 const HomePage = () => {
   const navigate = useNavigate()
@@ -19,6 +20,8 @@ const HomePage = () => {
           Create
         </button>
       </div>
+
+      <ContactList />
     </div>
   )
 }
