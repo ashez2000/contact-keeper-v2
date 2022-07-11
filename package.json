@@ -1,0 +1,19 @@
+{
+  "name": "contact-keeper-v2",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start:dev:server": "npm run start:dev --prefix ./server"
+  },
+  "keywords": [],
+  "author": "Aswin Gangadharan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashez2000/contact-keeper-v2.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ashez2000/contact-keeper-v2/issues"
+  },
+  "homepage": "https://github.com/ashez2000/contact-keeper-v2#readme"
+}
