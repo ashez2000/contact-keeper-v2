@@ -1,7 +1,17 @@
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const ContactList = () => {
-  const navigate = useNavigate()
+  const [contacts, setContacts] = useState([])
+
+  useEffect(() => {
+    const fetchContacts = async () => {
+      const res = await fetch('/api/contacts')
+      const data = await res.json()
+      setContacts(data.data.contacts)
+    }
+    fetchContacts()
+  }, [])
 
   return (
     <div>
@@ -15,51 +25,25 @@ const ContactList = () => {
           </tr>
         </thead>
         <tbody>
-          <tr onClick={() => navigate('/edit/123')}>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-          </tr>
+          {contacts.map((contact, idx) => (
+            <ContactItem key={contact._id} contact={contact} idx={idx + 1} />
+          ))}
         </tbody>
       </table>
     </div>
+  )
+}
+
+const ContactItem = ({ contact, idx }) => {
+  const navigate = useNavigate()
+
+  return (
+    <tr onClick={() => navigate(`/edit/${contact._id}`)}>
+      <th scope="row">{idx}</th>
+      <td>{contact.name}</td>
+      <td>{contact.email}</td>
+      <td>{contact.phone}</td>
+    </tr>
   )
 }
 
