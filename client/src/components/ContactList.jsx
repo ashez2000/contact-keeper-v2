@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom'
+
 const ContactList = () => {
+  const navigate = useNavigate()
+
   return (
     <div>
       <table className="table">
@@ -11,7 +15,7 @@ const ContactList = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr onClick={() => navigate('/edit/123')}>
             <th scope="row">1</th>
             <td>Mark</td>
             <td>Otto</td>
@@ -22,6 +26,30 @@ const ContactList = () => {
             <td>Jacob</td>
             <td>Thornton</td>
             <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry the Bird</td>
+            <td>@twitter</td>
+            <td>@twitter</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry the Bird</td>
+            <td>@twitter</td>
+            <td>@twitter</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry the Bird</td>
+            <td>@twitter</td>
+            <td>@twitter</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry the Bird</td>
+            <td>@twitter</td>
+            <td>@twitter</td>
           </tr>
           <tr>
             <th scope="row">3</th>
