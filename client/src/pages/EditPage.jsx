@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 
-const CreatePage = () => {
+const EditPage = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -44,6 +44,14 @@ const CreatePage = () => {
     fetchData()
   }, [])
 
+  const handleDelete = async () => {
+    await fetch(`/api/contacts/${params.id}`, {
+      method: 'DELETE',
+    })
+
+    navigate('/')
+  }
+
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
       <h1 className="mb-3">Create new contact</h1>
@@ -73,9 +81,13 @@ const CreatePage = () => {
         />
 
         <button className="btn btn-warning">Update</button>
+        <span className="mx-2" />
+        <button className="btn btn-danger" type="button" onClick={handleDelete}>
+          Delete
+        </button>
       </form>
     </div>
   )
 }
 
-export default CreatePage
+export default EditPage
