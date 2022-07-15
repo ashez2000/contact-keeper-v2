@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { createContact } from '../utils/api'
 
 const CreatePage = () => {
   const [name, setName] = useState('')
@@ -10,17 +11,11 @@ const CreatePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const res = await fetch('/api/contacts', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        phone,
-      }),
-    })
+    try {
+      await createContact({ name, email, phone })
+    } catch (err) {
+      console.error(err)
+    }
 
     setName('')
     setEmail('')

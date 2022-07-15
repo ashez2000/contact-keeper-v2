@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { getAllContacts } from '../utils/api'
 
 const ContactList = () => {
   const [contacts, setContacts] = useState([])
 
   useEffect(() => {
     const fetchContacts = async () => {
-      const res = await fetch('/api/contacts')
-      const data = await res.json()
-      setContacts(data.data.contacts)
+      const data = await getAllContacts()
+      setContacts(data.contacts)
     }
+
     fetchContacts()
   }, [])
 

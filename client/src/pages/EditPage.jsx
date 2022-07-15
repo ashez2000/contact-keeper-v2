@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { getContact, updateContact, deleteContact } from '../utils/api'
 
 const EditPage = () => {
   const [name, setName] = useState('')
@@ -11,17 +12,7 @@ const EditPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await fetch(`/api/contacts/${params.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        phone,
-      }),
-    })
+    await updateContact(params.id, { name, email, phone })
 
     setName('')
     setEmail('')
@@ -32,9 +23,8 @@ const EditPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`/api/contacts/${params.id}`)
-      const data = await res.json()
-      const contact = data.data.contact
+      const data = await getContact(params.id)
+      const contact = data.contact
 
       setName(contact.name)
       setEmail(contact.email)
@@ -45,16 +35,13 @@ const EditPage = () => {
   }, [])
 
   const handleDelete = async () => {
-    await fetch(`/api/contacts/${params.id}`, {
-      method: 'DELETE',
-    })
-
+    await deleteContact(params.id)
     navigate('/')
   }
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
-      <h1 className="mb-3">Create new contact</h1>
+      <h1 className="mb-3">Edit : {name}</h1>
       <form className="w-50" onSubmit={handleSubmit}>
         <input
           className="form-control mb-3"
