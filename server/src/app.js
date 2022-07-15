@@ -1,6 +1,8 @@
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
+const path = require('path')
+
 const errorHandler = require('./middlewares/error.middleware')
 const contactRouter = require('./routes/contact.router')
 
@@ -9,6 +11,11 @@ const app = express()
 app.use(cors())
 app.use(morgan('dev'))
 app.use(express.json())
+app.use(express.static(path.join(__dirname, '..', 'web_build')))
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'web_build', 'index.html'))
+})
 
 app.get('/ping', (req, res) => {
   res.statusCode(200).send('Hello World')
