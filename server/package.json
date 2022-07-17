@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node src/main.js",
     "dev": "nodemon src/main.js",
-    "prod": "nodemon src/main.js"
+    "prod": "nodemon src/main.js",
+    "data:im": "node ./data/seed.js -i",
+    "data:ds": "node ./data/seed.js -d"
   },
   "keywords": [],
   "author": "Aswin Gangadharan",
