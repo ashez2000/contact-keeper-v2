@@ -5,6 +5,7 @@ const path = require('path')
 
 const errorHandler = require('./middlewares/error.middleware')
 const contactRouter = require('./routes/contact.router')
+const authRouter = require('./routes/auth.router')
 
 const app = express()
 
@@ -22,6 +23,14 @@ app.get('/ping', (req, res) => {
 })
 
 app.use('/api/contacts', contactRouter)
+app.use('/api/auth', authRouter)
+
+app.all('*', (req, res, next) => {
+  res.status(404).json({
+    status: 'fail',
+    error: `Can't find ${req.originalUrl} on this server!`,
+  })
+})
 
 app.use(errorHandler)
 
