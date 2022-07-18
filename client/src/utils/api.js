@@ -1,12 +1,24 @@
 const API_URL = '/api'
 
 const getAllContacts = async () => {
-  const response = await fetch(`${API_URL}/contacts`)
+  const response = await fetch(`${API_URL}/contacts`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
   return response.json()
 }
 
 const getContact = async (id) => {
-  const response = await fetch(`${API_URL}/contacts/${id}`)
+  const response = await fetch(`${API_URL}/contacts/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
   return response.json()
 }
 
@@ -15,6 +27,7 @@ const createContact = async (contact) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
     body: JSON.stringify(contact),
   })
@@ -27,6 +40,7 @@ const updateContact = async (id, contact) => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
     body: JSON.stringify(contact),
   })
@@ -37,6 +51,10 @@ const updateContact = async (id, contact) => {
 const deleteContact = async (id) => {
   const response = await fetch(`${API_URL}/contacts/${id}`, {
     method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
   })
 
   return response.json()
