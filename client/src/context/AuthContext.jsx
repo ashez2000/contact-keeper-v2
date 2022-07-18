@@ -4,6 +4,8 @@ import { getuser } from '../utils/api'
 export const AuthContext = createContext({
   isAuthenticated: false,
   user: null,
+  setIsAuthenticated: () => {},
+  setUser: () => {},
 })
 
 export const useAuth = () => {
@@ -17,6 +19,8 @@ export const AuthProvider = ({ children }) => {
   const value = {
     isAuthenticated,
     user,
+    setIsAuthenticated,
+    setUser,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
