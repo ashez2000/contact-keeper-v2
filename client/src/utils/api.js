@@ -42,10 +42,49 @@ const deleteContact = async (id) => {
   return response.json()
 }
 
+const signup = async (user) => {
+  const response = await fetch(`${API_URL}/auth/signup`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  })
+
+  return response.json()
+}
+
+const login = async (user) => {
+  const response = await fetch(`${API_URL}/auth/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(user),
+  })
+
+  return response.json()
+}
+
+const getuser = async () => {
+  const response = await fetch(`${API_URL}/auth/getuser`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  })
+
+  return response.json()
+}
+
 export {
   getAllContacts,
   getContact,
   createContact,
   updateContact,
   deleteContact,
+  signup,
+  login,
+  getuser,
 }
