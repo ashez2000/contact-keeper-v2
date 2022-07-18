@@ -8,7 +8,7 @@ const AppError = require('../utils/app-error.utils')
  * @access Private
  */
 const getContacts = asyncHandler(async (req, res, next) => {
-  const contacts = await Contact.find()
+  const contacts = await Contact.find({ user: req.user })
   return res.status(200).json({ status: 'success', contacts })
 })
 
@@ -23,6 +23,7 @@ const createContact = asyncHandler(async (req, res, next) => {
     name,
     email,
     phone,
+    user: req.user,
   })
 
   return res.status(201).json({ status: 'success', contact })
@@ -39,6 +40,10 @@ const getContact = asyncHandler(async (req, res, next) => {
 
   if (!contact) {
     return next(new AppError(`No contact found with id:${id}`, 404))
+  }
+
+  if (contact.user.toString() !== req.user) {
+    return next(new AppError(`Not authorized to access this contact`, 401))
   }
 
   return res.status(200).json({ status: 'success', contact })
@@ -66,6 +71,10 @@ const updateContact = asyncHandler(async (req, res, next) => {
     return next(new AppError(`No contact found with id:${id}`, 404))
   }
 
+  if (contact.user.toString() !== req.user) {
+    return next(new AppError(`Not authorized to access this contact`, 401))
+  }
+
   return res.status(200).json({ status: 'success', contact })
 })
 
@@ -82,7 +91,11 @@ const deleteContact = asyncHandler(async (req, res, next) => {
     return next(new AppError(`No contact found with id:${id}`, 404))
   }
 
-  return res.status(200).json({ status: 'success', contact })
+  if (contact.user.toString() !== req.user) {
+    return next(new AppError(`Not authorized to access this contact`, 401))
+  }
+
+  return res.status(200).json({ status: 'success' })
 })
 
 module.exports = {
