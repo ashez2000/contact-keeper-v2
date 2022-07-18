@@ -16,6 +16,20 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [user, setUser] = useState(null)
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const data = await getuser()
+        setUser(data.user)
+        setIsAuthenticated(true)
+      } catch (error) {
+        console.log(error.message)
+      }
+    }
+
+    fetchUser()
+  }, [])
+
   const value = {
     isAuthenticated,
     user,

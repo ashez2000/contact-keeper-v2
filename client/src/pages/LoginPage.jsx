@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { login } from '../utils/api'
@@ -9,7 +9,13 @@ const LoginPage = () => {
   const [password, setPassword] = useState('')
 
   const navigate = useNavigate()
-  const { setIsAuthenticated, setUser } = useAuth()
+  const { setIsAuthenticated, setUser, isAuthenticated } = useAuth()
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/')
+    }
+  }, [isAuthenticated])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
