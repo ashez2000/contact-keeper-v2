@@ -21,7 +21,7 @@ const HomePage = () => {
         </button>
       </div>
 
-      {/* <ContactList /> */}
+      <ContactList />
     </div>
   )
 }

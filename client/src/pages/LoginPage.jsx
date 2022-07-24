@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { login } from '../utils/api'
 import { useAuth } from '../context/AuthContext'
+import { loginUser } from '../utils/api/auth'
 
 const LoginPage = () => {
   const [email, setEmail] = useState('')
@@ -21,18 +21,12 @@ const LoginPage = () => {
     e.preventDefault()
 
     try {
-      const res = await login({ email, password })
-
-      setUser(res.user)
+      const res = await loginUser(email, password)
+      setUser(res.data.user)
       setIsAuthenticated(true)
-      localStorage.setItem('token', res.token)
-
-      setEmail('')
-      setPassword('')
-
-      navigate('/')
+      localStorage.setItem('token', res.data.token)
     } catch (err) {
-      console.error(err.message)
+      alert(err.response.data.error)
     }
   }
 

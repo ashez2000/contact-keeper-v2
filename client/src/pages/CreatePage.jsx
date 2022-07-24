@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { createContact } from '../utils/api'
+import { createContact } from '../utils/api/contact'
 
 const CreatePage = () => {
   const [name, setName] = useState('')

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getContact, updateContact, deleteContact } from '../utils/api'
+import { getContact, updateContact, deleteContact } from '../utils/api/contact'
 
 const EditPage = () => {
   const [name, setName] = useState('')
@@ -23,8 +23,8 @@ const EditPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getContact(params.id)
-      const contact = data.contact
+      const res = await getContact(params.id)
+      const contact = res.data.contact
 
       setName(contact.name)
       setEmail(contact.email)

@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react'
-import { getuser } from '../utils/api'
+import { createContext, useContext, useState, useEffect } from 'react'
+import { getUser } from '../utils/api/auth'
 
 export const AuthContext = createContext({
   isAuthenticated: false,
@@ -17,17 +17,12 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const data = await getuser()
-        setUser(data.user)
+    getUser().then((res) => {
+      if (res.data) {
         setIsAuthenticated(true)
-      } catch (error) {
-        console.log(error.message)
+        setUser(res.data.user)
       }
-    }
-
-    fetchUser()
+    })
   }, [])
 
   const value = {

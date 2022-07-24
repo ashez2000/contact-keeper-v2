@@ -1,0 +1,4 @@
+- BUG:
+  - after logout
+  - and then logging in with new user
+    - show the prev contacts of prev user
